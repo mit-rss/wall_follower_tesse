@@ -1,0 +1,7 @@
+scan_topic: "/tesse/front_lidar/scan"
+drive_topic: "/tesse/drive"
+odometry_topic: "/tesse/odom"
+side: 1 #-1 right, 1 left
+velocity: 4
+desired_distance: 5.5
+track: "wall_follower_complex" #wall_follower_simple for simple track

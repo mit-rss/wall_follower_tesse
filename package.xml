@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<package>
+	<name>wall_follower_tesse</name>
+	<version>0.0.0</version>
+	<description>MIT RSS 2021 wall follower for tesse simulator</description>
+
+	<maintainer email="someone@example.com">Joe</maintainer>
+	<license>MIT</license>
+	<buildtool_depend>catkin</buildtool_depend>
+	<run_depend>map_server</run_depend>
+</package>
