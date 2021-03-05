@@ -14,6 +14,8 @@
 
 ## Submission
 
+- include team assessment form
+
 ## Grading
 
 - include a rubric: 7 points report, 2 points briefing, 1 point speed
