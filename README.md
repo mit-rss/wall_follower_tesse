@@ -12,6 +12,13 @@
 - team-based lab
 - link to tesse_install
 
+## Submission
+
+## Grading
+
+- include a rubric: 7 points report, 2 points briefing, 1 point speed
+- explain how speed-based grading will work
+
 ## Starter Code
 
 - what we tell them to not modify, how to begin, file structure
@@ -29,7 +36,7 @@ Then rebuild your workspace with `catkin_make`:
 
 
 
-## Adapting 2D Wall Follower 
+## Adapting 2D Wall Follower
 - differences between 2d and tesse
 - list of topics available
 
@@ -44,6 +51,3 @@ Then rebuild your workspace with `catkin_make`:
 
 
 ### Scoring
-
-
-
