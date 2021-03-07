@@ -11,7 +11,7 @@
 
 - introduce tesse
 - team-based lab
-- link to tesse_install
+- link to [tesse_install](https://github.com/mit-rss/tesse_install)
 
 ## Submission
 
@@ -42,7 +42,6 @@ Then rebuild your workspace with `catkin_make`:
 
 ## Adapting 2D Wall Follower
 - differences between 2d and tesse
-- list of topics available
 
 ## Recording and Playing Back Rosbags with TESSE
 
@@ -66,7 +65,7 @@ You will be implementing a wall follower in tesse to complete a loop around two 
 ### Tracks and Spawn Points
 There are two tracks you must complete. You can toggle which track your car spawns at by changing the `track` parameter in `/wall_follower_tesse/params_tesse.yaml`. The two options are `wall_follower_simple` and `wall_follower_complex` for the simple and complex tracks respectively. **For the simple track, you will be required to follow the wall on the right side of the car. For the complex track, you will be required to follow the wall on the left side of the car.**
 ![map](./media/map.png)
-####Note:
+#### Note:
 
 * Simple track spawn POV, follow the right wall.
     - <img src="./media/wall_follower_simple.png" width="500">
@@ -94,4 +93,9 @@ There are two tracks you must complete. You can toggle which track your car spaw
     - You should not need to publish messages directly to `/initialpose` in your code! This is helper topic that allows you to spawn your car around the scene with the "2D Pose Estimate" tool in rviz if you wish to use it. The correct way to spawn your car is by changing the parameter in `params_tesse.yaml`. However, this topic is here if you wish to test your wall follower in other places in the environment. 
 
 ## Steps to Success (some tips)
-
+- start with simple track at slow speeds
+- look at hz drive commands speed
+- increase VM compute
+- rqt_multiplot tool
+- link to ransac
+- 
