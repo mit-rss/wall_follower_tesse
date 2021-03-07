@@ -1,0 +1,6 @@
+<launch>
+    <!-- Launch the speed logger with parameters -->
+    <node pkg="wall_follower_tesse" name="record_speeds" type="record_speeds.py" output="screen">
+        <rosparam command="load" file="$(find wall_follower_tesse)/params_tesse.yaml"/>
+    </node>
+</launch>

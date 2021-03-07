@@ -19,7 +19,13 @@ class RecordSpeeds:
         self.log_file = "speed_log.txt"
         self.speed_log = None
 
+        self.got_first_message = False
+
     def odom_callback(self, odom_data):
+        if not self.got_first_message:
+            self.got_first_message = True
+            print("logging speed at ~/.ros/{}".format(self.log_file))
+        
         twist = odom_data.twist.twist
         linear_velocity = np.array([[twist.linear.x, twist.linear.y, twist.linear.z]])
         #angular_velocity = np.array([[twist.angular.x, twist.angular.y, twist.angular.z]])
