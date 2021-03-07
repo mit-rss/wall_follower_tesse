@@ -1,12 +1,17 @@
 <launch>
 	<!-- 1 is Windridge City, 2 is test scene -->
 	<arg name="initial_scene"       default="1"/>
-  
+
 	<!-- Maps and TESSE simulator interface -->
   <include file="$(find tesse_ros_bridge)/launch/tesse_bridge.launch">
 		<arg name="initial_scene" value="$(arg initial_scene)"/>
 	</include>
 
   <!-- Other things you may want to launch -->
-  <include file="$(find wall_follower)/launch/wall_follower_tesse.launch"/>
+  <!-- <include file="$(find wall_follower)/launch/wall_follower_tesse.launch"/> -->
+
+	<!-- Launch the speed logger with parameters -->
+  <node pkg="wall_follower_tesse" name="record_speeds" type="record_speeds.py" output="screen">
+    <rosparam command="load" file="$(find wall_follower_tesse)/params_tesse.yaml"/>
+  </node>
 </launch>
