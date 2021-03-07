@@ -7,9 +7,6 @@
 		<arg name="initial_scene" value="$(arg initial_scene)"/>
 	</include>
 
-  <!-- Other things you may want to launch -->
-  <!-- <include file="$(find wall_follower)/launch/wall_follower_tesse.launch"/> -->
-
 	<!-- Launch the speed logger with parameters -->
   <node pkg="wall_follower_tesse" name="record_speeds" type="record_speeds.py" output="screen">
     <rosparam command="load" file="$(find wall_follower_tesse)/params_tesse.yaml"/>
