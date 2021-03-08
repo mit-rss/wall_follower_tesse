@@ -86,9 +86,11 @@ There are two tracks you must complete. You can toggle which track your car spaw
 ![map](./media/map.png)
 
 Simple track spawn POV, follow the right wall:
+
 <img src="./media/wall_follower_simple.png" width="500">
 
 Complex track spawn POV, follow the left wall:
+
 <img src="./media/wall_follower_complex.png" width="500">
 
 ## Recording and Playing Back Rosbags with TESSE
