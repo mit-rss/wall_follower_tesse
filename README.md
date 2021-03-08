@@ -28,8 +28,6 @@ A good place to start would be to sit down with your new team and consolidate yo
 
 ## Starter Code
 
-- what we tell them to not modify, how to begin, file structure
-
 Clone this repository into your catkin workspace:
 
     cd ~/racecar_ws/src
@@ -41,10 +39,19 @@ Then rebuild your workspace with `catkin_make`:
     catkin_make
     source devel/setup.bash
 
+We have set up this repository as a ROS package called `wall_follower_tesse`. There is a skeleton launch file for you at `wall_follower_tesse/launch/wall_follower_tesse.launch`, as well as a parameter file at `wall_follower_tesse/params_tesse.yaml`. For a reminder on how to reference the parameters in your ROS node, see [this documentation](http://wiki.ros.org/rospy/Overview/Parameter%20Server).
 
+You should set up your wall follower as a ROS node inside the `wall_follower_tesse/src` directory, similar to the structure of your 2D wall follower in Lab 2. Then, you should add your wall follower node to the `wall_follower_tesse.launch` file - you can follow the example of the way we currently launch the `record_speeds.py` node to launch it with all the parameters loaded.
+
+Once you have added your node and are ready to test it, first start the TESSE executable on your host machine with `--client_ip_addr` set to your VM IP address (see the [TESSE setup handout](https://github.com/mit-rss/tesse_install) if you need a refresher on how to find this). Then, run the following command in a terminal within your VM (remember that your VM must be in host-only mode):
+
+    roslaunch wall_follower_tesse wall_follower_tesse.launch
+
+This will take care of starting a roscore if there is not one running already, launching the `tesse_ros_bridge` that allows your VM and host machine to communicate, launching a helper node we have written to log your racecar's speed as it is completing the tracks, and finally your own wall follower node (assuming you have added it to the launch file).
 
 ## Adapting 2D Wall Follower
-- differences between 2d and tesse
+
+While TESSE will use different topic names than you did for your 2D wall follower, you can also make use of the parameters in `params_tesse.yaml` as described above, which use the same naming convention as Lab 2. You will also have to tune your wall follower to work with the new environment, as well as the simple and complex tracks described below, while trying to maximize your average speed as you complete the tracks. You can see the Important Topic Details section below to learn about the specifics of the different topics used for TESSE as compared to the 2D simulator.
 
 ## Recording and Playing Back Rosbags with TESSE
 
@@ -64,7 +71,7 @@ To analyze and play back your rosbag file:
 - You can play back your recording by running `rosbag play <output_rosbag_name.bag>` - you will need to be running `roscore` in a separate terminal for this to work. If you run `rostopic list` or `rostopic echo <topic>` while playing back the recording, it will behave as it would have while the recorded code was running.
 
 ## Modules
-You will be implementing a wall follower in tesse to complete a loop around two different buildings without collisions, and quickly. The tracks are shown in the map below with the direction you should be following, and you will be able to spawn your cars at the start of either track (indicated with green stars) with a parameter in `params_tesse.yaml`. We suggest you start with the simple course, but we expect you to complete both without collisions and analyze your performance and average speeds achieved in the reports and briefings. 
+You will be implementing a wall follower in tesse to complete a loop around two different buildings without collisions, and quickly. The tracks are shown in the map below with the direction you should be following, and you will be able to spawn your cars at the start of either track (indicated with green stars) with a parameter in `params_tesse.yaml`. We suggest you start with the simple course, but we expect you to complete both without collisions and analyze your performance and average speeds achieved in the reports and briefings.
 ### Tracks and Spawn Points
 There are two tracks you must complete. You can toggle which track your car spawns at by changing the `track` parameter in `/wall_follower_tesse/params_tesse.yaml`. The two options are `wall_follower_simple` and `wall_follower_complex` for the simple and complex tracks respectively. **For the simple track, you will be required to follow the wall on the right side of the car. For the complex track, you will be required to follow the wall on the left side of the car.**
 ![map](./media/map.png)
@@ -80,7 +87,7 @@ There are two tracks you must complete. You can toggle which track your car spaw
 - details about what we expect them to show
 - details about how to get average speed (how it will included in scoring, refer to scoring)
 
-## Import Topic Details 
+## Import Topic Details
 * `/tesse/drive`
     - [http://docs.ros.org/en/melodic/api/ackermann_msgs/html/msg/AckermannDriveStamped.html](http://docs.ros.org/en/melodic/api/ackermann_msgs/html/msg/AckermannDriveStamped.html)
 * `/tesse/odom`
@@ -93,7 +100,7 @@ There are two tracks you must complete. You can toggle which track your car spaw
     - [ http://docs.ros.org/melodic/api/sensor_msgs/html/msg/Imu.html]( http://docs.ros.org/melodic/api/sensor_msgs/html/msg/Imu.html)
 * `/initialpose`
     - [http://docs.ros.org/en/melodic/api/geometry_msgs/html/msg/PoseStamped.html](http://docs.ros.org/en/melodic/api/geometry_msgs/html/msg/PoseStamped.html)
-    - You should not need to publish messages directly to `/initialpose` in your code! This is helper topic that allows you to spawn your car around the scene with the "2D Pose Estimate" tool in rviz if you wish to use it. The correct way to spawn your car is by changing the parameter in `params_tesse.yaml`. However, this topic is here if you wish to test your wall follower in other places in the environment. 
+    - You should not need to publish messages directly to `/initialpose` in your code! This is helper topic that allows you to spawn your car around the scene with the "2D Pose Estimate" tool in rviz if you wish to use it. The correct way to spawn your car is by changing the parameter in `params_tesse.yaml`. However, this topic is here if you wish to test your wall follower in other places in the environment.
 
 ## Steps to Success (some tips)
 - start with simple track at slow speeds
@@ -101,4 +108,4 @@ There are two tracks you must complete. You can toggle which track your car spaw
 - increase VM compute
 - rqt_multiplot tool
 - link to ransac
-- 
+-
