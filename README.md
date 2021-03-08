@@ -14,7 +14,7 @@ In this week's lab you're going to work with your team to implement a wall follo
 
 The goal is to complete the two tracks described below autonomously without collisions, with an added challenge of maintaining an average speed comparable to the staff solution (see grading rubric).
 
-A good place to start would be to sit down with your new team and consolidate your wall follower code from last week's lab. You should be able to put your working code in `wall_follower_tesse/src/wall_follower_tesse.py`, change the parameters to the appropriate TESSE parameters in `wall_follower_tesse/params_tesse.yaml`, and run the example launch file in `wall_follower_tesse/launch` to get a minimal working wall follower in TESSE. See the Starter Code section below for more details on the file structure.
+A good place to start would be to sit down with your new team and consolidate your wall follower code from last week's lab. You should be able to put your working code into a node like `wall_follower_tesse/src/wall_follower_tesse.py`, change the parameters to the appropriate TESSE parameters in `wall_follower_tesse/params_tesse.yaml`, and add your node to the launch file at `wall_follower_tesse/launch/wall_follower_tesse.launch` to get a minimal working wall follower in TESSE. See the Starter Code section below for more details on the file structure.
 
 ## Submission and Grading
 
