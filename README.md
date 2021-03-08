@@ -77,12 +77,12 @@ You will be implementing a wall follower in tesse to complete a loop around two 
 
 There are two tracks you must complete. You can toggle which track your car spawns at by changing the `track` parameter in `params_tesse.yaml`. The two options are `wall_follower_simple` and `wall_follower_complex` for the simple and complex tracks respectively. **For the simple track, you will be required to follow the wall on the right side of the car. For the complex track, you will be required to follow the wall on the left side of the car.**
 ![map](./media/map.png)
-#### Note:
 
-* Simple track spawn POV, follow the right wall.
-    - <img src="./media/wall_follower_simple.png" width="500">
-* Complex track spawn POV, follow the left wall.
-    - <img src="./media/wall_follower_complex.png" width="500">
+Simple track spawn POV, follow the right wall:
+<img src="./media/wall_follower_simple.png" width="500">
+
+Complex track spawn POV, follow the left wall:
+<img src="./media/wall_follower_complex.png" width="500">
 
 ## Recording and Playing Back Rosbags with TESSE
 
@@ -105,7 +105,7 @@ To analyze and play back your rosbag file:
 
 This section will explain how to use our helper node and script to obtain the average speed of your racecar as it completes the two tracks outlined above. For details on how this speed will factor into scoring, see the Grading section above.
 
-We have written a node at `wall_follower_tesse/src/record_speeds.py` that keeps track of your racecar's forward velocity as it drives. Feel free to take a look at the node if you are curious, but do not modify it. If necessary, we have the ability to run our original speed averager on your wall follower code. (TODO: is this necessary to say? should we talk more about this / honesty in the grading section?)
+We have written a node at `wall_follower_tesse/src/record_speeds.py` that keeps track of your racecar's forward velocity as it drives. Feel free to take a look at the node if you are curious, but **do not modify it. If necessary, we have the ability to run our original speed averager on your wall follower code. (TODO: is this necessary to say? should we talk more about this / honesty in the grading section?)**
 
 When you run your wall follower using the `wall_follower_tesse.launch` launch file, it will automatically run the speed logger alongside your wall follower node. Alternatively, if you'd like to run the speed logger on its own for greater flexibility, we have provided a launch file at `wall_follower_tesse/launch/speed_logger.launch` which launches only the speed logger node. If you choose this option, you must make sure the speed logger is launched before you start running your code, or it will not be able to record all the speeds for an accurate speed reading. One scenario in which this might be useful is if you wanted to record a rosbag (see section above) of your wall follower running without the speed logger for improved performance, then replay the rosbag together with the speed logger after the fact to get an average speed for the recorded wall following.
 
