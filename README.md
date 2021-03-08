@@ -14,11 +14,11 @@ In this week's lab you're going to work with your team to implement a wall follo
 
 The goal is to complete the two tracks described below autonomously without collisions, with an added challenge of maintaining an average speed above 4 m/s (see grading rubric).
 
-A good place to start would be to sit down with your new team and consolidate your wall follower code from last week's lab. You should be able to put your working code in `/src/wall_follower_tesse.py`, change the parameters to the appropriate TESSE parameters in `params_tesse.yaml`, and run the example launch file in `/launch` to get a minimal working wall follower in TESSE. See the Starter Code section below for more details on the file structure.
+A good place to start would be to sit down with your new team and consolidate your wall follower code from last week's lab. You should be able to put your working code in `wall_follower_tesse/src/wall_follower_tesse.py`, change the parameters to the appropriate TESSE parameters in `wall_follower_tesse/params_tesse.yaml`, and run the example launch file in `wall_follower_tesse/launch` to get a minimal working wall follower in TESSE. See the Starter Code section below for more details on the file structure.
 
 ## Submission
 
-For this lab you will be publishing a report on your team's github pages website, giving an 8-min briefing presentation together with your team, and submitting a [team member assessment form](https://docs.google.com/forms/d/e/1FAIpQLScM6T3JsnlFQldhL_fVmAr9FkUILOjbXHM_nYxK280UZwJPww/viewform). See the deliverables chart at the top of this page for due dates and times.
+For this lab you will be publishing a report on your team's github pages website, giving an 8 minute briefing presentation together with your team, and submitting a [team member assessment form](https://docs.google.com/forms/d/e/1FAIpQLScM6T3JsnlFQldhL_fVmAr9FkUILOjbXHM_nYxK280UZwJPww/viewform). See the deliverables chart at the top of this page for due dates and times.
 
 - todo: confirm details of briefing / report that need to be included here
 - todo: spell out deliverables
@@ -73,9 +73,9 @@ While TESSE will use different topic names than you did for your 2D wall followe
     - You should not need to publish messages directly to `/initialpose` in your code! This is helper topic that allows you to spawn your car around the scene with the "2D Pose Estimate" tool in rviz if you wish to use it. The correct way to spawn your car is by changing the parameter in `params_tesse.yaml`. However, this topic is here if you wish to test your wall follower in other places in the environment.
 
 ## Tracks and Spawn Points
-You will be implementing a wall follower in tesse to complete a loop around two different buildings without collisions, and quickly. The tracks are shown in the map below with the direction you should be following, and you will be able to spawn your cars at the start of either track (indicated with green stars) with a parameter in `params_tesse.yaml`. We suggest you start with the simple course, but we expect you to complete both without collisions and analyze your performance and average speeds achieved in the reports and briefings.
+You will be implementing a wall follower in tesse to complete a loop around two different buildings without collisions, and quickly. The tracks are shown in the map below with the direction you should be following, and you will be able to spawn your cars at the start of either track (indicated with green stars) with a parameter in `wall_follower_tesse/params_tesse.yaml`. We suggest you start with the simple course, but we expect you to complete both without collisions and analyze your performance and average speeds achieved in the reports and briefings.
 
-There are two tracks you must complete. You can toggle which track your car spawns at by changing the `track` parameter in `/wall_follower_tesse/params_tesse.yaml`. The two options are `wall_follower_simple` and `wall_follower_complex` for the simple and complex tracks respectively. **For the simple track, you will be required to follow the wall on the right side of the car. For the complex track, you will be required to follow the wall on the left side of the car.**
+There are two tracks you must complete. You can toggle which track your car spawns at by changing the `track` parameter in `params_tesse.yaml`. The two options are `wall_follower_simple` and `wall_follower_complex` for the simple and complex tracks respectively. **For the simple track, you will be required to follow the wall on the right side of the car. For the complex track, you will be required to follow the wall on the left side of the car.**
 ![map](./media/map.png)
 #### Note:
 
@@ -103,7 +103,15 @@ To analyze and play back your rosbag file:
 
 ## Obtaining Average Speed
 
-- details about how to get average speed (how it will included in scoring, refer to scoring)
+This section will explain how to use our helper node and script to obtain the average speed of your racecar as it completes the two tracks outlined above. For details on how this speed will factor into scoring, see the Grading section above.
+
+We have written a node at `wall_follower_tesse/src/record_speeds.py` that keeps track of your racecar's forward velocity as it drives. Feel free to take a look at the node if you are curious, but do not modify it. If necessary, we have the ability to run our original speed averager on your wall follower code. (TODO: is this necessary to say? should we talk more about this / honesty in the grading section?)
+
+When you run your wall follower using the `wall_follower_tesse.launch` launch file, it will automatically run the speed logger alongside your wall follower node. Alternatively, if you'd like to run the speed logger on its own for greater flexibility, we have provided a launch file at `wall_follower_tesse/launch/speed_logger.launch` which launches only the speed logger node. If you choose this option, you must make sure the speed logger is launched before you start running your code, or it will not be able to record all the speeds for an accurate speed reading. One scenario in which this might be useful is if you wanted to record a rosbag (see section above) of your wall follower running without the speed logger for improved performance, then replay the rosbag together with the speed logger after the fact to get an average speed for the recorded wall following.
+
+After you have run your wall follower code and the speed logger, either together in real time or using a rosbag, you will need to run one more script to get the average speed from the forward velocity log. We've provided this script at `wall_follower_tesse/src/average_speed.py` - to execute it run `python average_speed.py` from within the `src` directory in your VM terminal (or use an absolute path to run it from elsewhere).
+
+By default, the speed logger will leave its log at `~/.ros/speed_log.txt` when run via launch file, so `average_speed.py` defaults to looking for it there. However, if you would like to save, rename, and move around these speed logs you can definitely do so - to get the average speed from a log that has been moved or renamed you can specify the absolute path of your log as an optional command line argument: `python average_speed.py <absolute path to log>`. Note that the script will need you to use `/home/racecar` rather than the `~` shortcut when providing this path.
 
 ## Steps to Success (some tips)
 - start with simple track at slow speeds
@@ -111,4 +119,3 @@ To analyze and play back your rosbag file:
 - increase VM compute
 - rqt_multiplot tool
 - link to ransac
--
