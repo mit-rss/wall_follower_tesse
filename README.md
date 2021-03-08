@@ -1,8 +1,8 @@
 | Deliverable | Due Date              |
 |---------------|----------------------------------------------------------------------------|
-| Briefing Due Date  | Wednesday, March 17th at 1:00PM EST                |
+| Briefing (8 min presentation)  | Wednesday, March 17th at 1:00PM EST                |
 | [Team Member Assessment](https://docs.google.com/forms/d/e/1FAIpQLScM6T3JsnlFQldhL_fVmAr9FkUILOjbXHM_nYxK280UZwJPww/viewform)  | Wednesday, March 17th at 1:00PM EST                |
-| Report Due Date     | Friday, March 19th at 11:59PM EST on github pages site |
+| Report (on team github pages website)     | Friday, March 19th at 11:59PM EST |
 
 
 # Lab 3: Wall Following in TESSE
@@ -10,16 +10,17 @@
 ## Introduction
 Welcome to the world of 3D! We're transitioning to using the realistic car simulator in TESSE for this lab. Make sure you've followed all the instructions in [TESSE setup handout](https://github.com/mit-rss/tesse_install) before proceeding.
 
-In this week's lab you're going to work with your team to implement a wall follower in tesse. This environment uses a realistic physics simulator, so you will need to account for delays in acceleration and deceleration. The car can tilt, and drift, which will add significant noise to recieved lidar data. In addition, the environment is dense with other buildings, lamposts, trees, and city fixtures.
+In this week's lab you're going to work with your team to implement a wall follower in TESSE. This environment uses a realistic physics simulator, so you will need to account for delays in acceleration and deceleration. The car can tilt, and drift, which will add significant noise to received lidar data. In addition, the environment is dense with other buildings, lampposts, trees, and city fixtures.
 
 The goal is to complete the two tracks described below autonomously without collisions, with an added challenge of maintaining an average speed above 4 m/s (see grading rubric).
 
-A good place to start would be to sit down with your new team and consolidate your wall follower code from last week's lab. You should be able to put your working code in `/src/wall_follower_tesse.py`, change the parameters to the appropriate tesse parameters in `params_tesse.yaml`, and run the example launch file in `/launch` to get a minimal working wall follower in tesse. See the Starter Code section below for more details on the file structure.
+A good place to start would be to sit down with your new team and consolidate your wall follower code from last week's lab. You should be able to put your working code in `/src/wall_follower_tesse.py`, change the parameters to the appropriate TESSE parameters in `params_tesse.yaml`, and run the example launch file in `/launch` to get a minimal working wall follower in TESSE. See the Starter Code section below for more details on the file structure.
 
 ## Submission
 
-For this lab you will be publishing a report on your team's github pages website, giving a briefing presentation together with your team, and submitting a [team member assessment form](https://docs.google.com/forms/d/e/1FAIpQLScM6T3JsnlFQldhL_fVmAr9FkUILOjbXHM_nYxK280UZwJPww/viewform). See the deliverables chart at the top of this page for due dates and times.
+For this lab you will be publishing a report on your team's github pages website, giving an 8-min briefing presentation together with your team, and submitting a [team member assessment form](https://docs.google.com/forms/d/e/1FAIpQLScM6T3JsnlFQldhL_fVmAr9FkUILOjbXHM_nYxK280UZwJPww/viewform). See the deliverables chart at the top of this page for due dates and times.
 
+- todo: confirm details of briefing / report that need to be included here
 - todo: spell out deliverables
 
 ## Grading
@@ -52,7 +53,36 @@ This will take care of starting a roscore if there is not one running already, l
 
 ## Adapting 2D Wall Follower
 
+As described in the introduction, the TESSE environment uses a realistic physics simulator, so you will need to account for delays in acceleration and deceleration. The car can tilt, and drift, which will add significant noise to received lidar data. In addition, the environment is dense with other buildings, lampposts, trees, and city fixtures. All of these things will make the experience of writing code for TESSE much more similar to writing code for the physical racecars.
+
 While TESSE will use different topic names than you did for your 2D wall follower, you can also make use of the parameters in `params_tesse.yaml` as described above, which use the same naming convention as Lab 2. You will also have to tune your wall follower to work with the new environment, as well as the simple and complex tracks described below, while trying to maximize your average speed as you complete the tracks. You can see the Important Topic Details section below to learn about the specifics of the different topics used for TESSE as compared to the 2D simulator.
+
+## Import Topic Details
+* `/tesse/drive`
+    - [http://docs.ros.org/en/melodic/api/ackermann_msgs/html/msg/AckermannDriveStamped.html](http://docs.ros.org/en/melodic/api/ackermann_msgs/html/msg/AckermannDriveStamped.html)
+* `/tesse/odom`
+    - [http://docs.ros.org/melodic/api/nav_msgs/html/msg/Odometry.html](http://docs.ros.org/melodic/api/nav_msgs/html/msg/Odometry.html)
+* `/tesse/front_lidar/scan`
+    - [http://docs.ros.org/melodic/api/sensor_msgs/html/msg/LaserScan.html](http://docs.ros.org/melodic/api/sensor_msgs/html/msg/LaserScan.html)
+* `/tesse/collision`
+    - [https://github.mit.edu/rss/tesse-ros-bridge/blob/master/ROS/msg/CollisionStats.msg](https://github.mit.edu/rss/tesse-ros-bridge/blob/master/ROS/msg/CollisionStats.msg)
+* `/tesse/imu/clean/imu`
+    - [ http://docs.ros.org/melodic/api/sensor_msgs/html/msg/Imu.html]( http://docs.ros.org/melodic/api/sensor_msgs/html/msg/Imu.html)
+* `/initialpose`
+    - [http://docs.ros.org/en/melodic/api/geometry_msgs/html/msg/PoseStamped.html](http://docs.ros.org/en/melodic/api/geometry_msgs/html/msg/PoseStamped.html)
+    - You should not need to publish messages directly to `/initialpose` in your code! This is helper topic that allows you to spawn your car around the scene with the "2D Pose Estimate" tool in rviz if you wish to use it. The correct way to spawn your car is by changing the parameter in `params_tesse.yaml`. However, this topic is here if you wish to test your wall follower in other places in the environment.
+
+## Tracks and Spawn Points
+You will be implementing a wall follower in tesse to complete a loop around two different buildings without collisions, and quickly. The tracks are shown in the map below with the direction you should be following, and you will be able to spawn your cars at the start of either track (indicated with green stars) with a parameter in `params_tesse.yaml`. We suggest you start with the simple course, but we expect you to complete both without collisions and analyze your performance and average speeds achieved in the reports and briefings.
+
+There are two tracks you must complete. You can toggle which track your car spawns at by changing the `track` parameter in `/wall_follower_tesse/params_tesse.yaml`. The two options are `wall_follower_simple` and `wall_follower_complex` for the simple and complex tracks respectively. **For the simple track, you will be required to follow the wall on the right side of the car. For the complex track, you will be required to follow the wall on the left side of the car.**
+![map](./media/map.png)
+#### Note:
+
+* Simple track spawn POV, follow the right wall.
+    - <img src="./media/wall_follower_simple.png" width="500">
+* Complex track spawn POV, follow the left wall.
+    - <img src="./media/wall_follower_complex.png" width="500">
 
 ## Recording and Playing Back Rosbags with TESSE
 
@@ -71,37 +101,9 @@ To analyze and play back your rosbag file:
 - You can view info regarding the recording, including what topics and how many messages of different types were published, by running `rosbag info <output_rosbag_name.bag>`.
 - You can play back your recording by running `rosbag play <output_rosbag_name.bag>` - you will need to be running `roscore` in a separate terminal for this to work. If you run `rostopic list` or `rostopic echo <topic>` while playing back the recording, it will behave as it would have while the recorded code was running.
 
-## Modules
-You will be implementing a wall follower in tesse to complete a loop around two different buildings without collisions, and quickly. The tracks are shown in the map below with the direction you should be following, and you will be able to spawn your cars at the start of either track (indicated with green stars) with a parameter in `params_tesse.yaml`. We suggest you start with the simple course, but we expect you to complete both without collisions and analyze your performance and average speeds achieved in the reports and briefings.
-### Tracks and Spawn Points
-There are two tracks you must complete. You can toggle which track your car spawns at by changing the `track` parameter in `/wall_follower_tesse/params_tesse.yaml`. The two options are `wall_follower_simple` and `wall_follower_complex` for the simple and complex tracks respectively. **For the simple track, you will be required to follow the wall on the right side of the car. For the complex track, you will be required to follow the wall on the left side of the car.**
-![map](./media/map.png)
-#### Note:
+## Obtaining Average Speed
 
-* Simple track spawn POV, follow the right wall.
-    - <img src="./media/wall_follower_simple.png" width="500">
-* Complex track spawn POV, follow the left wall.
-    - <img src="./media/wall_follower_complex.png" width="500">
-
-### todo
-
-- details about what we expect them to show
 - details about how to get average speed (how it will included in scoring, refer to scoring)
-
-## Import Topic Details
-* `/tesse/drive`
-    - [http://docs.ros.org/en/melodic/api/ackermann_msgs/html/msg/AckermannDriveStamped.html](http://docs.ros.org/en/melodic/api/ackermann_msgs/html/msg/AckermannDriveStamped.html)
-* `/tesse/odom`
-    - [http://docs.ros.org/melodic/api/nav_msgs/html/msg/Odometry.html](http://docs.ros.org/melodic/api/nav_msgs/html/msg/Odometry.html)
-* `/tesse/front_lidar/scan`
-    - [http://docs.ros.org/melodic/api/sensor_msgs/html/msg/LaserScan.html](http://docs.ros.org/melodic/api/sensor_msgs/html/msg/LaserScan.html)
-* `/tesse/collision`
-    - [https://github.mit.edu/rss/tesse-ros-bridge/blob/master/ROS/msg/CollisionStats.msg](https://github.mit.edu/rss/tesse-ros-bridge/blob/master/ROS/msg/CollisionStats.msg)
-* `/tesse/imu/clean/imu`
-    - [ http://docs.ros.org/melodic/api/sensor_msgs/html/msg/Imu.html]( http://docs.ros.org/melodic/api/sensor_msgs/html/msg/Imu.html)
-* `/initialpose`
-    - [http://docs.ros.org/en/melodic/api/geometry_msgs/html/msg/PoseStamped.html](http://docs.ros.org/en/melodic/api/geometry_msgs/html/msg/PoseStamped.html)
-    - You should not need to publish messages directly to `/initialpose` in your code! This is helper topic that allows you to spawn your car around the scene with the "2D Pose Estimate" tool in rviz if you wish to use it. The correct way to spawn your car is by changing the parameter in `params_tesse.yaml`. However, this topic is here if you wish to test your wall follower in other places in the environment.
 
 ## Steps to Success (some tips)
 - start with simple track at slow speeds
