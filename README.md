@@ -1,8 +1,8 @@
 | Deliverable | Due Date              |
 |---------------|----------------------------------------------------------------------------|
-| Briefing (8 min presentation + 3 min Q&A)  | Wednesday, March 17th at 1:00PM EST **TODO: why not 3?**|
+| Briefing (8 min presentation + 3 min Q&A) (slides due on [github pages](https://github.mit.edu/rss/website2021))  | Wednesday, March 17th at 1:00PM EST **TODO: why not 3?**|
 | [Team Member Assessment](https://docs.google.com/forms/d/e/1FAIpQLScM6T3JsnlFQldhL_fVmAr9FkUILOjbXHM_nYxK280UZwJPww/viewform)  | Friday, March 19th at 11:59PM EST |
-| Report (on [team github pages website](https://github.mit.edu/rss/website2021)) | Friday, March 19th at 11:59PM EST |
+| Report (on [github pages](https://github.mit.edu/rss/website2021)) | Friday, March 19th at 11:59PM EST |
 | Pushed code with speed logs | Friday, March 19th at 11:59PM EST |
 
 
@@ -13,13 +13,13 @@ Welcome to the world of 3D! We're transitioning to using the realistic car simul
 
 In this week's lab you're going to work with your team to implement a wall follower in TESSE. This environment uses a realistic physics simulator, so you will need to account for delays in acceleration and deceleration. The car can tilt, and drift, which will add significant noise to received lidar data. In addition, the environment is dense with other buildings, lampposts, trees, and city fixtures.
 
-The goal is to complete the two tracks described below autonomously without collisions, with an added challenge of maintaining an average speed comparable to the staff solution (see grading rubric).
+The goal is to complete the two tracks described below autonomously without collisions, with an added challenge of maintaining an average speed comparable to the staff solution (see grading rubric). Unlike lab 2, you are allowed to vary your velocity so you are no longer restrained to publishing the set velocity from the parameter file. Note that it is fully possible to successfully complete this lab without doing so, however we gave you this option in case you wanted to optimize your solution for faster average speeds.
 
 A good place to start would be to sit down with your new team and consolidate your wall follower code from last week's lab. You should be able to put your working code into a node like `wall_follower_tesse/src/wall_follower_tesse.py`, change the parameters to the appropriate TESSE parameters in `wall_follower_tesse/params_tesse.yaml`, and add your node to the launch file at `wall_follower_tesse/launch/wall_follower_tesse.launch` to get a minimal working wall follower in TESSE. See the Starter Code section below for more details on the file structure.
 
 ## Submission and Grading
 
-From now on, for each lab, you will be publishing a report on your team's github pages website, giving an 8 minute briefing presentation (plus 3 minutes Q&A) together with your team, and submitting a [team member assessment form](https://docs.google.com/forms/d/e/1FAIpQLScM6T3JsnlFQldhL_fVmAr9FkUILOjbXHM_nYxK280UZwJPww/viewform). See the deliverables chart at the top of this page for due dates and times.
+From now on, for each lab, you will be publishing a report on your team's github pages website, giving an 8 minute briefing presentation (plus 3 minutes Q&A) together with your team, uploading the briefing slides to your github pages website, and submitting a [team member assessment form](https://docs.google.com/forms/d/e/1FAIpQLScM6T3JsnlFQldhL_fVmAr9FkUILOjbXHM_nYxK280UZwJPww/viewform). See the deliverables chart at the top of this page for due dates and times.
 
 If you haven't already done so, follow the instructions for your team's [github pages website](https://github.mit.edu/rss/website2021), which will be hosting your lab reports. As part of this you will need to create an organization for your team on github.mit.edu called rss2021-[TEAM_NUMBER] and make sure all of your code is pushed there by the lab report deadline. At this time, the TAs will pull your team's report from your website. Please ensure that the report is complete and that you have linked to your presentation. Your team organization is also where you should push all of your lab code.
 
@@ -67,13 +67,9 @@ Once you have added your node and are ready to test it, first start the TESSE ex
 
 This will take care of starting a roscore if there is not one running already, launching the `tesse_ros_bridge` that allows your VM and host machine to communicate, and launching your own wall follower node (assuming you have added it to the launch file).
 
-## Adapting 2D Wall Follower
-
-As described in the introduction, the TESSE environment uses a realistic physics simulator, so you will need to account for delays in acceleration and deceleration. The car can tilt, and drift, which will add significant noise to received lidar data. In addition, the environment is dense with other buildings, lampposts, trees, and city fixtures. All of these things will make the experience of writing code for TESSE much more similar to writing code for the physical racecars.
-
-While TESSE will use different topic names than you did for your 2D wall follower, you can also make use of the parameters in `params_tesse.yaml` as described above, which use the same naming convention as Lab 2. You will also have to tune your wall follower to work with the new environment, as well as the simple and complex tracks described below, while trying to maximize your average speed as you complete the tracks. You can see the Important Topic Details section below to learn about the specifics of the different topics used for TESSE as compared to the 2D simulator.
-
 ## Import Topic Details
+While TESSE will use different topic names than the 2D wall follower, you can make use of the parameters in `params_tesse.yaml` as described above, which use the same naming convention as Lab 2 for many topics.
+
 * `/tesse/drive`
     - [http://docs.ros.org/en/melodic/api/ackermann_msgs/html/msg/AckermannDriveStamped.html](http://docs.ros.org/en/melodic/api/ackermann_msgs/html/msg/AckermannDriveStamped.html)
 * `/tesse/odom`
@@ -145,9 +141,9 @@ Alternatively, you can save multiple speed logs by renaming them and moving them
 
 Note that the script will need you to use `/home/racecar` rather than the `~` shortcut when providing this path.
 
-## Steps to Success (some tips)
-- start with simple track at slow speeds
-- look at hz drive commands speed
-- increase VM compute
-- rqt_multiplot tool
-- link to ransac
+## Tips and Resources
+* Use rviz! Rviz has a ton of nice visualizations you can plot using [markers](http://wiki.ros.org/rviz/DisplayTypes/Marker). Ideas for things to visualize include the trajectory your car took or the line you generated from linear regression to follow. Keep in mind plotting lots of things in rviz (or even running rviz at all) may slow your wall follower code (it certainly does on my 2015 Macbook) so your best bet is to record rosbags and play them back to analyze in the data in rviz in this case.
+* Your node will respond slower if you have a lot of stuff running in your VM. You can check the rate at which your drive commands are being sent with `rostopic hz /tesse/drive`. If your wall follower was performing well before but suddenly seems broken, check that the speed at which you're publishing commands is fast enough.
+- If your computer can handle it, increase the number of cores and RAM you give your virtual machine in VMWare settings. 
+- [rqt_multiplot](http://wiki.ros.org/rqt_multiplot) is a great tool for gathering and plotting data. Linked here so you know it exists :).
+- You may find that your old solution in 2d simulation worked relatively well but is suddenly not as well-behaved in Tesse. Keep in mind that the realistic simulation environment adds a lot more noise and a simple proportional or PD controller may not be enough. You may want to look into [RANSAC](https://en.wikipedia.org/wiki/Random_sample_consensus) or other algorithms for robost wall following.   
