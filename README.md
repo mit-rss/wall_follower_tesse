@@ -24,8 +24,6 @@
 
 ## Starter Code
 
-- what we tell them to not modify, how to begin, file structure
-
 Clone this repository into your catkin workspace:
 
     cd ~/racecar_ws/src
@@ -37,11 +35,19 @@ Then rebuild your workspace with `catkin_make`:
     catkin_make
     source devel/setup.bash
 
+We have set up this repository as a ROS package called `wall_follower_tesse`. There is a skeleton launch file for you at `wall_follower_tesse/launch/wall_follower_tesse.launch`, as well as a parameter file at `wall_follower_tesse/params_tesse.yaml`. For a reminder on how to reference the parameters in your ROS node, see [this documentation](http://wiki.ros.org/rospy/Overview/Parameter%20Server).
 
+You should set up your wall follower as a ROS node inside the `wall_follower_tesse/src` directory, similar to the structure of your 2D wall follower in Lab 2. Then, you should add your wall follower node to the `wall_follower_tesse.launch` file - you can follow the example of the way we currently launch the `record_speeds.py` node to launch it with all the parameters loaded.
+
+Once you have added your node and are ready to test it, first start the TESSE executable on your host machine with `--client_ip_addr` set to your VM IP address (see the [TESSE setup handout](https://github.com/mit-rss/tesse_install) if you need a refresher on how to find this). Then, run the following command in a terminal within your VM (remember that your VM must be in host-only mode):
+
+    roslaunch wall_follower_tesse wall_follower_tesse.launch
+
+This will take care of starting a roscore if there is not one running already, launching the `tesse_ros_bridge` that allows your VM and host machine to communicate, launching a helper node we have written to log your racecar's speed as it is completing the tracks, and finally your own wall follower node (assuming you have added it to the launch file).
 
 ## Adapting 2D Wall Follower
-- differences between 2d and tesse
-- list of topics available
+
+While TESSE will use different topic names than you did for your 2D wall follower, you can also make use of the parameters in `params_tesse.yaml` as described above, which use the same naming convention as Lab 2. You will also have to tune your wall follower to work with the new environment, as well as the simple and complex tracks described below, while trying to maximize your average speed as you complete the tracks. You can see the Important Topic Details section below to learn about the specifics of the different topics used for TESSE as compared to the 2D simulator.
 
 ## Recording and Playing Back Rosbags with TESSE
 
