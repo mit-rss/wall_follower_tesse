@@ -2,7 +2,7 @@
 |---------------|----------------------------------------------------------------------------|
 | Briefing (8 min presentation + 3 min Q&A)  | Wednesday, March 17th at 1:00PM EST |
 | [Team Member Assessment](https://docs.google.com/forms/d/e/1FAIpQLScM6T3JsnlFQldhL_fVmAr9FkUILOjbXHM_nYxK280UZwJPww/viewform)  | Friday, March 19th at 11:59PM EST |
-| Report (on team github pages website)     | Friday, March 19th at 11:59PM EST |
+| Report (on [team github pages website](https://github.mit.edu/rss/website2021)) | Friday, March 19th at 11:59PM EST |
 
 
 # Lab 3: Wall Following in TESSE
@@ -12,7 +12,7 @@ Welcome to the world of 3D! We're transitioning to using the realistic car simul
 
 In this week's lab you're going to work with your team to implement a wall follower in TESSE. This environment uses a realistic physics simulator, so you will need to account for delays in acceleration and deceleration. The car can tilt, and drift, which will add significant noise to received lidar data. In addition, the environment is dense with other buildings, lampposts, trees, and city fixtures.
 
-The goal is to complete the two tracks described below autonomously without collisions, with an added challenge of maintaining an average speed above 4 m/s (see grading rubric).
+The goal is to complete the two tracks described below autonomously without collisions, with an added challenge of maintaining an average speed comparable to the staff solution (see grading rubric).
 
 A good place to start would be to sit down with your new team and consolidate your wall follower code from last week's lab. You should be able to put your working code in `wall_follower_tesse/src/wall_follower_tesse.py`, change the parameters to the appropriate TESSE parameters in `wall_follower_tesse/params_tesse.yaml`, and run the example launch file in `wall_follower_tesse/launch` to get a minimal working wall follower in TESSE. See the Starter Code section below for more details on the file structure.
 
@@ -20,7 +20,9 @@ A good place to start would be to sit down with your new team and consolidate yo
 
 From now on, for each lab, you will be publishing a report on your team's github pages website, giving an 8 minute briefing presentation (plus 3 minutes Q&A) together with your team, and submitting a [team member assessment form](https://docs.google.com/forms/d/e/1FAIpQLScM6T3JsnlFQldhL_fVmAr9FkUILOjbXHM_nYxK280UZwJPww/viewform). See the deliverables chart at the top of this page for due dates and times.
 
-You can view the rubrics for the [lab report]() and the [briefing](). **TODO: link to rubrics** You will receive a grade out of 10 points for each. Your final lab grade will also be out of 10 points, based on the following weights:
+If you haven't already done so, follow the instructions for your team's [github pages website](https://github.mit.edu/rss/website2021), which will be hosting your lab reports. As part of this you will need to create an organization for your team on github.mit.edu called rss2021-[TEAM_NUMBER] and make sure all of your code is pushed there by the lab report deadline. At this time, the TAs will pull your team's report from your website. Please ensure that the report is complete and that you have linked to your presentation. Your team organization is also where you should push all of your lab code.
+
+You can view the rubrics for the [lab report]() and the [briefing]() on Canvas. **TODO: link to rubrics** You will receive a grade out of 10 points for each. Your final lab grade will also be out of 10 points, based on the following weights:
 
 | Deliverable Grade | Weight              |
 |---------------|----------------------------------------------------------------------------|
@@ -34,14 +36,11 @@ The average speed grade refers to how fast your racecar is able to complete the 
 
 where your_simple_speed and your_complex_speed are the average speeds you achieve on the simple and complex tracks, respectively, and staff_simple_speed and staff_complex_speeds are the corresponding average speeds achieved by the staff solution. Thus if your solution achieves the same speeds as the staff solution, you will get full points for this section. **TODO: tell them what staff speeds on simple and complex are**
 
-In your reports and briefings, use of video, screen shots, screen recordings etc. is highly recommended. Make quantitative and qualitative evaluations of your results. Make sure you demonstrate the ability of your car to successfully complete both tracks outlined below without collisions. Data on average speed (required for speed grade above) and collisions are good examples of metrics for evaluation, but feel free to get creative - feel free to have a look at the Important Topic Details section below for inspiration. The rosbag recording functionality outlined below can also be a useful tool for evaluating your code and post-processing data, and tool such as rqt_multiplot and rviz are also helpful for visualization.
+In your reports and briefings, use of video, screen shots, screen recordings etc. is highly recommended. Make quantitative and qualitative evaluations of your results. Make sure you demonstrate the ability of your car to successfully complete both tracks outlined below without collisions. Data on average speed (required for speed grade above) and collisions are good examples of metrics for evaluation, but feel free to also get creative - have a look at the Important Topic Details section below for inspiration. The rosbag recording functionality outlined below can also be a useful tool for evaluating your code and post-processing data, and tool such as rqt_multiplot and rviz are also helpful for visualization.
 
 ## Starter Code
 
-Clone this repository into your catkin workspace:
-
-    cd ~/racecar_ws/src
-    git clone https://github.com/mit-rss/wall_follower_tesse.git
+Fork this starter repository into your team github.mit.edu organization (rss2021-[TEAM_NUMBER]), and then clone your team's repository into your catkin workspace at `~/racecar_ws/src`.
 
 Then rebuild your workspace with `catkin_make`:
 
@@ -51,7 +50,7 @@ Then rebuild your workspace with `catkin_make`:
 
 We have set up this repository as a ROS package called `wall_follower_tesse`. There is a skeleton launch file for you at `wall_follower_tesse/launch/wall_follower_tesse.launch`, as well as a parameter file at `wall_follower_tesse/params_tesse.yaml`. For a reminder on how to reference the parameters in your ROS node, see [this documentation](http://wiki.ros.org/rospy/Overview/Parameter%20Server).
 
-You should set up your wall follower as a ROS node inside the `wall_follower_tesse/src` directory, similar to the structure of your 2D wall follower in Lab 2. Then, you should add your wall follower node to the `wall_follower_tesse.launch` file - you can follow the example of the way we currently launch the `record_speeds.py` node to launch it with all the parameters loaded.
+You should set up your wall follower as a ROS node inside the `wall_follower_tesse/src` directory, similar to the structure of your 2D wall follower in Lab 2. Then, you should add your wall follower node to the `wall_follower_tesse.launch` file - you can follow the example of the way we currently launch the `record_speeds.py` node in `wall_follower_tesse/launch/speed_logger.launch` with all the parameters loaded.
 
 Once you have added your node and are ready to test it, first start the TESSE executable on your host machine with `--client_ip_addr` set to your VM IP address (see the [TESSE setup handout](https://github.com/mit-rss/tesse_install) if you need a refresher on how to find this). Then, run the following command in a terminal within your VM (remember that your VM must be in host-only mode):
 
@@ -119,7 +118,7 @@ When you run your wall follower using the `wall_follower_tesse.launch` launch fi
 
 After you have run your wall follower code and the speed logger, either together in real time or using a rosbag, you will need to run one more script to get the average speed from the forward velocity log. We've provided this script at `wall_follower_tesse/src/average_speed.py` - to execute it run `python average_speed.py` from within the `src` directory in your VM terminal (or use an absolute path to run it from elsewhere).
 
-By default, the speed logger will leave its log at `~/.ros/speed_log.txt` when run via launch file, so `average_speed.py` defaults to looking for it there. However, if you would like to save, rename, and move around these speed logs you can definitely do so - to get the average speed from a log that has been moved or renamed you can specify the absolute path of your log as an optional command line argument: `python average_speed.py <absolute path to log>`. Note that the script will need you to use `/home/racecar` rather than the `~` shortcut when providing this path.
+By default, the speed logger will leave its log at `~/.ros/speed_log.txt` when run via launch file, so `average_speed.py` defaults to looking for it there. **Also, note that each time you run the speed logger node, this `~/.ros/speed_log.txt` location will be overwritten.** However, if you would like to save, rename, and move around these speed logs you can definitely do so - to get the average speed from a log that has been moved or renamed you can specify the absolute path of your log as an optional command line argument: `python average_speed.py <absolute path to log>`. Note that the script will need you to use `/home/racecar` rather than the `~` shortcut when providing this path.
 
 ## Steps to Success (some tips)
 - start with simple track at slow speeds
