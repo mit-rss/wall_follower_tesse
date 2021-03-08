@@ -64,7 +64,7 @@ Once you have added your node and are ready to test it, first start the TESSE ex
 
     roslaunch wall_follower_tesse wall_follower_tesse.launch
 
-This will take care of starting a roscore if there is not one running already, launching the `tesse_ros_bridge` that allows your VM and host machine to communicate, launching a helper node we have written to log your racecar's speed as it is completing the tracks, and finally your own wall follower node (assuming you have added it to the launch file).
+This will take care of starting a roscore if there is not one running already, launching the `tesse_ros_bridge` that allows your VM and host machine to communicate, and launching your own wall follower node (assuming you have added it to the launch file).
 
 ## Adapting 2D Wall Follower
 
