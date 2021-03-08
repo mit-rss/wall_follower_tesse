@@ -23,7 +23,7 @@ From now on, for each lab, you will be publishing a report on your team's github
 
 If you haven't already done so, follow the instructions for your team's [github pages website](https://github.mit.edu/rss/website2021), which will be hosting your lab reports. As part of this you will need to create an organization for your team on github.mit.edu called rss2021-[TEAM_NUMBER] and make sure all of your code is pushed there by the lab report deadline. At this time, the TAs will pull your team's report from your website. Please ensure that the report is complete and that you have linked to your presentation. Your team organization is also where you should push all of your lab code.
 
-You can view the rubrics for the [lab report]() and the [briefing]() on Canvas. **TODO: link to rubrics** You will receive a grade out of 10 points for each. Your final lab grade will also be out of 10 points, based on the following weights:
+You can view the rubrics for the [lab report](https://docs.google.com/document/d/1iTIu6wThHpAwqRQ7rM10aH6TC9S9KXdV4stQZOIH1zE/edit?usp=sharing) and the [briefing](https://docs.google.com/document/d/1lTngqa15Z-5YGQjHZpm5xF9oeEbIdCOoywlrFIDO8K4/edit?usp=sharing) for more details on specific grading criteria. You will receive a grade out of 10 points for each. Your final lab grade will also be out of 10 points, based on the following weights:
 
 | Deliverable Grade | Weight              |
 |---------------|----------------------------------------------------------------------------|
@@ -144,6 +144,6 @@ Note that the script will need you to use `/home/racecar` rather than the `~` sh
 ## Tips and Resources
 * Use rviz! Rviz has a ton of nice visualizations you can plot using [markers](http://wiki.ros.org/rviz/DisplayTypes/Marker). Ideas for things to visualize include the trajectory your car took or the line you generated from linear regression to follow. Keep in mind plotting lots of things in rviz (or even running rviz at all) may slow your wall follower code (it certainly does on my 2015 Macbook) so your best bet is to record rosbags and play them back to analyze in the data in rviz in this case.
 * Your node will respond slower if you have a lot of stuff running in your VM. You can check the rate at which your drive commands are being sent with `rostopic hz /tesse/drive`. If your wall follower was performing well before but suddenly seems broken, check that the speed at which you're publishing commands is fast enough.
-* If your computer can handle it, increase the number of cores and RAM you give your virtual machine in VMWare settings. 
+* If your computer can handle it, increase the number of cores and RAM you give your virtual machine in VMWare settings.
 * [rqt_multiplot](http://wiki.ros.org/rqt_multiplot) is a great tool for gathering and plotting data. Linked here so you know it exists :).
 * You may find that your old solution in 2d simulation worked relatively well but is suddenly not as well-behaved in Tesse. Keep in mind that the realistic simulation environment adds a lot more noise and a simple proportional or PD controller may not be enough. You may want to look into [RANSAC](https://en.wikipedia.org/wiki/Random_sample_consensus) or other algorithms for robost wall following.   
