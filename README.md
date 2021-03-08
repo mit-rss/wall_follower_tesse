@@ -1,6 +1,6 @@
 | Deliverable | Due Date              |
 |---------------|----------------------------------------------------------------------------|
-| Briefing (8 min presentation + 3 min Q&A)  | Wednesday, March 17th at 1:00PM EST |
+| Briefing (8 min presentation + 3 min Q&A)  | Wednesday, March 17th at 1:00PM EST **TODO: why not 3?**|
 | [Team Member Assessment](https://docs.google.com/forms/d/e/1FAIpQLScM6T3JsnlFQldhL_fVmAr9FkUILOjbXHM_nYxK280UZwJPww/viewform)  | Friday, March 19th at 11:59PM EST |
 | Report (on [team github pages website](https://github.mit.edu/rss/website2021)) | Friday, March 19th at 11:59PM EST |
 
