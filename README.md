@@ -1,7 +1,7 @@
 | Deliverable | Due Date              |
 |---------------|----------------------------------------------------------------------------|
-| Briefing (8 min presentation)  | Wednesday, March 17th at 1:00PM EST                |
-| [Team Member Assessment](https://docs.google.com/forms/d/e/1FAIpQLScM6T3JsnlFQldhL_fVmAr9FkUILOjbXHM_nYxK280UZwJPww/viewform)  | Wednesday, March 17th at 1:00PM EST                |
+| Briefing (8 min presentation)  | Wednesday, March 17th at 1:00PM EST |
+| [Team Member Assessment](https://docs.google.com/forms/d/e/1FAIpQLScM6T3JsnlFQldhL_fVmAr9FkUILOjbXHM_nYxK280UZwJPww/viewform)  | Friday, March 19th at 11:59PM EST |
 | Report (on team github pages website)     | Friday, March 19th at 11:59PM EST |
 
 
@@ -16,17 +16,25 @@ The goal is to complete the two tracks described below autonomously without coll
 
 A good place to start would be to sit down with your new team and consolidate your wall follower code from last week's lab. You should be able to put your working code in `wall_follower_tesse/src/wall_follower_tesse.py`, change the parameters to the appropriate TESSE parameters in `wall_follower_tesse/params_tesse.yaml`, and run the example launch file in `wall_follower_tesse/launch` to get a minimal working wall follower in TESSE. See the Starter Code section below for more details on the file structure.
 
-## Submission
+## Submission and Grading
 
-For this lab you will be publishing a report on your team's github pages website, giving an 8 minute briefing presentation together with your team, and submitting a [team member assessment form](https://docs.google.com/forms/d/e/1FAIpQLScM6T3JsnlFQldhL_fVmAr9FkUILOjbXHM_nYxK280UZwJPww/viewform). See the deliverables chart at the top of this page for due dates and times.
+From now on, for each lab, you will be publishing a report on your team's github pages website, giving an 8 minute briefing presentation together with your team, and submitting a [team member assessment form](https://docs.google.com/forms/d/e/1FAIpQLScM6T3JsnlFQldhL_fVmAr9FkUILOjbXHM_nYxK280UZwJPww/viewform). See the deliverables chart at the top of this page for due dates and times.
 
-- todo: confirm details of briefing / report that need to be included here
-- todo: spell out deliverables
+You can view the rubrics for the [lab report]() and the [briefing](). **TODO: link to rubrics** You will receive a grade out of 10 points for each. Your final lab grade will also be out of 10 points, based on the following weights:
 
-## Grading
+| Deliverable Grade | Weight              |
+|---------------|----------------------------------------------------------------------------|
+| briefing grade (out of 10)  | 20% |
+| lab report grade (out of 10) | 70% |
+| average speed grade (out of 10) | 10% |
 
-- include a rubric: 7 points report, 2 points briefing, 1 point speed
-- explain how speed-based grading will work
+The average speed grade refers to how fast your racecar is able to complete the wall following tracks - see below for details on the tracks and how to use the starter code to obtain your racecar's average speed. The raw 10-point average speed grade (accounting for 1 out of the 10 points of your total lab grade) is calculated as follows:
+
+    5 * min(1, your_simple_speed / staff_simple_speed) + 5 * min(1, your_complex_speed / staff_complex_speed)
+
+where your_simple_speed and your_complex_speed are the average speeds you achieve on the simple and complex tracks, respectively, and staff_simple_speed and staff_complex_speeds are the corresponding average speeds achieved by the staff solution. Thus if your solution achieves the same speeds as the staff solution, you will get full points for this section. **TODO: tell them what staff speeds on simple and complex are**
+
+In your reports and briefings, use of video, screen shots, screen recordings etc. is highly recommended. Make quantitative and qualitative evaluations of your results. Make sure you demonstrate the ability of your car to successfully complete both tracks outlined below without collisions. Data on average speed (required for speed grade above) and collisions are good examples of metrics for evaluation, but feel free to get creative - feel free to have a look at the Important Topic Details section below for inspiration. The rosbag recording functionality outlined below can also be a useful tool for evaluating your code and post-processing data, and tool such as rqt_multiplot and rviz are also helpful for visualization.
 
 ## Starter Code
 
