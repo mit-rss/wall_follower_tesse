@@ -40,6 +40,13 @@ In your reports and briefings, use of video, screen shots, screen recordings etc
 
 ## Starter Code
 
+Before starting, you will need to pull the master branch of `tesse-ros-bridge` (before doing so, you may want to save your IP addresses so that you can put them back into `tesse-bridge.launch` more easily afterwards)
+
+    cd ~/racecar_ws/src/tesse-ros-bridge
+    git pull
+
+You will also need to download the TESSE executable for this lab [here](https://drive.google.com/drive/folders/1wrwHy6pXzNmuwC8j3FCzVFqShZzP0Tfg?usp=sharing) - go to the folder corresponding to your host OS and download the latest executable (highest version number).
+
 Fork this starter repository into your team github.mit.edu organization (rss2021-[TEAM_NUMBER]), and then clone your team's repository into your catkin workspace at `~/racecar_ws/src`.
 
 Then rebuild your workspace with `catkin_make`:
