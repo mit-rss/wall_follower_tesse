@@ -1,6 +1,6 @@
 | Deliverable | Due Date              |
 |---------------|----------------------------------------------------------------------------|
-| Briefing (8 min presentation + 3 min Q&A)  | Wednesday, March 17th at 1:00PM EST |
+| Briefing (8 min presentation + 3 min Q&A) (slides due on [github pages](https://github.mit.edu/rss/website2021))  | Wednesday, March 17th at 1:00PM EST |
 | Report (on [team github pages website](https://github.mit.edu/rss/website2021)) | Friday, March 19th at 11:59PM EST |
 | Pushed code with speed logs | Friday, March 19th at 11:59PM EST |
 | [Team Member Assessment](https://docs.google.com/forms/d/e/1FAIpQLScM6T3JsnlFQldhL_fVmAr9FkUILOjbXHM_nYxK280UZwJPww/viewform)  | Friday, March 19th at 11:59PM EST |
@@ -66,12 +66,6 @@ Once you have added your node and are ready to test it, first start the TESSE ex
     roslaunch wall_follower_tesse wall_follower_tesse.launch
 
 This will take care of starting a roscore if there is not one running already, launching the `tesse_ros_bridge` that allows your VM and host machine to communicate, and launching your own wall follower node (assuming you have added it to the launch file).
-
-## Adapting 2D Wall Follower
-
-As described in the introduction, the TESSE environment uses a realistic physics simulator, so you will need to account for delays in acceleration and deceleration. The car can tilt, and drift, which will add significant noise to received lidar data. In addition, the environment is dense with other buildings, lampposts, trees, and city fixtures. All of these things will make the experience of writing code for TESSE much more similar to writing code for the physical racecars.
-
-While TESSE will use different topic names than you did for your 2D wall follower, you can also make use of the parameters in `params_tesse.yaml` as described above, which use the same naming convention as Lab 2. You will also have to tune your wall follower to work with the new environment, as well as the simple and complex tracks described below, while trying to maximize your average speed as you complete the tracks. You can see the Important Topic Details section below to learn about the specifics of the different topics used for TESSE as compared to the 2D simulator.
 
 ## Import Topic Details
 While TESSE will use different topic names than the 2D wall follower, you can make use of the parameters in `params_tesse.yaml` as described above, which use the same naming convention as Lab 2 for many topics.
