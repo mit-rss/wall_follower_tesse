@@ -34,7 +34,7 @@ The average speed grade refers to how fast your racecar is able to complete the 
 
     5 * min(1, your_simple_speed / staff_simple_speed) + 5 * min(1, your_complex_speed / staff_complex_speed)
 
-where your_simple_speed and your_complex_speed are the average speeds you achieve on the simple and complex tracks, respectively, and staff_simple_speed and staff_complex_speeds are the corresponding average speeds achieved by the staff solution. Thus if your solution achieves the same speeds as the staff solution, you will get full points for this section. **TODO: tell them what staff speeds on simple and complex are**
+where your_simple_speed and your_complex_speed are the average speeds you achieve on the simple and complex tracks, respectively, and staff_simple_speed and staff_complex_speeds are the corresponding average speeds achieved by the staff solution. Thus if your solution achieves the same speeds as the staff solution, you will get full points for this section. The staff solution gets 7 m/s for the simple track and 4 m/s for the complex track.
 
 In your reports and briefings, use of video, screen shots, screen recordings etc. is highly recommended. Make quantitative and qualitative evaluations of your results. Make sure you demonstrate the ability of your car to successfully complete both tracks outlined below without collisions. Data on average speed (required for speed grade above) and collisions are good examples of metrics for evaluation, but feel free to also get creative - have a look at the Important Topic Details section below for inspiration. The rosbag recording functionality outlined below can also be a useful tool for evaluating your code and post-processing data, and tool such as rqt_multiplot and rviz are also helpful for visualization.
 
@@ -103,7 +103,7 @@ Complex track spawn POV, follow the left wall:
 
 ## Recording and Playing Back Rosbags with TESSE
 
-Rosbags are a useful tool for recording various published messages when running your code and playing it back later.
+Rosbags are a useful tool for recording various published messages when running your code and playing it back later. **You will need to record a rosbag whenever you run your wall follower node if you want to be able to extract the average speed afterwards (see next section).**
 
 To record a rosbag while using TESSE and `tesse-ros-bridge`:
 - Start the TESSE executable on your host machine with `--client_ip_addr` set to your VM IP address (see the [TESSE setup handout](https://github.com/mit-rss/tesse_install) if you need a refresher on how to find this).
@@ -124,11 +124,27 @@ This section will explain how to use our helper node and script to obtain the av
 
 We have written a node at `wall_follower_tesse/src/record_speeds.py` that keeps track of your racecar's forward velocity as it drives. Feel free to take a look at the node if you are curious, but **do not modify it. If necessary, we have the ability to run our original speed averager on your wall follower code. (TODO: is this necessary to say? should we talk more about this / honesty in the grading section?)**
 
-When you run your wall follower using the `wall_follower_tesse.launch` launch file, it will automatically run the speed logger alongside your wall follower node. Alternatively, if you'd like to run the speed logger on its own for greater flexibility, we have provided a launch file at `wall_follower_tesse/launch/speed_logger.launch` which launches only the speed logger node. If you choose this option, you must make sure the speed logger is launched before you start running your code, or it will not be able to record all the speeds for an accurate speed reading. One scenario in which this might be useful is if you wanted to record a rosbag (see section above) of your wall follower running without the speed logger for improved performance, then replay the rosbag together with the speed logger after the fact to get an average speed for the recorded wall following.
+In order to allow you to get maximum performance when running your wall follower nodes, we have separated the average speed extraction into a post-processing step that you will perform on a rosbag. See the previous section for how to record a rosbag of your racecar completing a wall following track. Once you have your rosbag restamped, proceed with the following steps to extract the average speed.
 
-After you have run your wall follower code and the speed logger, either together in real time or using a rosbag, you will need to run one more script to get the average speed from the forward velocity log. We've provided this script at `wall_follower_tesse/src/average_speed.py` - to execute it run `python average_speed.py` from within the `src` directory in your VM terminal (or use an absolute path to run it from elsewhere).
+Launch the speed logger at `wall_follower_tesse/launch/speed_logger.launch` which launches only the speed logger node:
 
-By default, the speed logger will leave its log at `~/.ros/speed_log.txt` when run via launch file, so `average_speed.py` defaults to looking for it there. **Also, note that each time you run the speed logger node, this `~/.ros/speed_log.txt` location will be overwritten.** However, if you would like to save, rename, and move around these speed logs you can definitely do so - to get the average speed from a log that has been moved or renamed you can specify the absolute path of your log as an optional command line argument: `python average_speed.py <absolute path to log>`. Note that the script will need you to use `/home/racecar` rather than the `~` shortcut when providing this path.
+    roslaunch wall_follower_tesse speed_logger.launch
+
+Then replay the rosbag in another terminal by running:
+
+    rosbag play <path to rosbag.bag>
+
+When the rosbag is finished replaying, you can terminate the speed logger as well - by default it will save the speed log at `~/.ros/speed_log.txt` when run via launch file, but **note that each time you run the speed logger node, this `~/.ros/speed_log.txt` location will be overwritten. If you want to save it, rename and/or move it.** You can quickly extract the average speed from the default location by running the following script with no command line arguments:
+
+    cd ~/racecar_ws/src/wall_follower_tesse/src
+    python average_speed.py
+
+Alternatively, you can save multiple speed logs by renaming them and moving them around - and you can always run the speed averaging script at a later time by specifying the absolute path to the log file as a command line argument:
+
+    cd ~/racecar_ws/src/wall_follower_tesse/src
+    python average_speed.py <absolute path to log>
+
+Note that the script will need you to use `/home/racecar` rather than the `~` shortcut when providing this path.
 
 ## Steps to Success (some tips)
 - start with simple track at slow speeds
