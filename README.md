@@ -3,6 +3,7 @@
 | Briefing (8 min presentation + 3 min Q&A)  | Wednesday, March 17th at 1:00PM EST **TODO: why not 3?**|
 | [Team Member Assessment](https://docs.google.com/forms/d/e/1FAIpQLScM6T3JsnlFQldhL_fVmAr9FkUILOjbXHM_nYxK280UZwJPww/viewform)  | Friday, March 19th at 11:59PM EST |
 | Report (on [team github pages website](https://github.mit.edu/rss/website2021)) | Friday, March 19th at 11:59PM EST |
+| Pushed code with speed logs | Friday, March 19th at 11:59PM EST |
 
 
 # Lab 3: Wall Following in TESSE
@@ -34,7 +35,7 @@ The average speed grade refers to how fast your racecar is able to complete the 
 
     5 * min(1, your_simple_speed / staff_simple_speed) + 5 * min(1, your_complex_speed / staff_complex_speed)
 
-where your_simple_speed and your_complex_speed are the average speeds you achieve on the simple and complex tracks, respectively, and staff_simple_speed and staff_complex_speeds are the corresponding average speeds achieved by the staff solution. Thus if your solution achieves the same speeds as the staff solution, you will get full points for this section. The staff solution gets 7 m/s for the simple track and 4 m/s for the complex track.
+where your_simple_speed and your_complex_speed are the average speeds you achieve on the simple and complex tracks, respectively, and staff_simple_speed and staff_complex_speeds are the corresponding average speeds achieved by the staff solution. Thus if your solution achieves the same speeds as the staff solution, you will get full points for this section. The staff solution gets 7 m/s for the simple track and 4 m/s for the complex track. **In addition to including these numbers in your report and briefing, push a speed log for each track to the root of your repo by the lab report deadline (name them `speed_log-simple.txt` and `speed_log-complex.txt` respectively.)**
 
 In your reports and briefings, use of video, screen shots, screen recordings etc. is highly recommended. Make quantitative and qualitative evaluations of your results. Make sure you demonstrate the ability of your car to successfully complete both tracks outlined below without collisions. Data on average speed (required for speed grade above) and collisions are good examples of metrics for evaluation, but feel free to also get creative - have a look at the Important Topic Details section below for inspiration. The rosbag recording functionality outlined below can also be a useful tool for evaluating your code and post-processing data, and tool such as rqt_multiplot and rviz are also helpful for visualization.
 
@@ -122,9 +123,7 @@ To analyze and play back your rosbag file:
 
 This section will explain how to use our helper node and script to obtain the average speed of your racecar as it completes the two tracks outlined above. For details on how this speed will factor into scoring, see the Grading section above.
 
-We have written a node at `wall_follower_tesse/src/record_speeds.py` that keeps track of your racecar's forward velocity as it drives. Feel free to take a look at the node if you are curious, but **do not modify it. If necessary, we have the ability to run our original speed averager on your wall follower code. (TODO: is this necessary to say? should we talk more about this / honesty in the grading section?)**
-
-In order to allow you to get maximum performance when running your wall follower nodes, we have separated the average speed extraction into a post-processing step that you will perform on a rosbag. See the previous section for how to record a rosbag of your racecar completing a wall following track. Once you have your rosbag restamped, proceed with the following steps to extract the average speed.
+We have written a node at `wall_follower_tesse/src/record_speeds.py` that keeps track of your racecar's forward velocity as it drives. In order to allow you to get maximum performance when running your wall follower nodes, we have separated the average speed extraction into a post-processing step that you will perform on a rosbag. See the previous section for how to record a rosbag of your racecar completing a wall following track. Once you have your rosbag restamped, proceed with the following steps to extract the average speed.
 
 Launch the speed logger at `wall_follower_tesse/launch/speed_logger.launch` which launches only the speed logger node:
 
