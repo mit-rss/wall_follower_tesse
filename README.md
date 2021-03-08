@@ -1,6 +1,6 @@
 | Deliverable | Due Date              |
 |---------------|----------------------------------------------------------------------------|
-| Presentation Due Date  | Wednesday, March 17th at 1:00PM EST                |
+| Briefing Due Date  | Wednesday, March 17th at 1:00PM EST                |
 | [Team Member Assessment](https://docs.google.com/forms/d/e/1FAIpQLScM6T3JsnlFQldhL_fVmAr9FkUILOjbXHM_nYxK280UZwJPww/viewform)  | Wednesday, March 17th at 1:00PM EST                |
 | Report Due Date     | Friday, March 19th at 11:59PM EST on github pages site |
 
@@ -8,18 +8,19 @@
 # Lab 3: Wall Following in TESSE
 
 ## Introduction
-Welcome to the world of 3D! We're transitioning to using the realistic car simulator in TESSE for this lab. Make sure you've followed all the instructions in [tesse_install](https://github.com/mit-rss/tesse_install) before proceeding.
+Welcome to the world of 3D! We're transitioning to using the realistic car simulator in TESSE for this lab. Make sure you've followed all the instructions in [TESSE setup handout](https://github.com/mit-rss/tesse_install) before proceeding.
 
-In this week's lab you're going to work with your team to implement a wall follower in tesse. This environment uses a realistic physics simulator, so you will need to account for delays in acceleration and deceleration. The car can tilt, and drift, which will add significant noise to recieved lidar data. In addition, the environment is dense with other buildings, lamposts, trees, and city fixtures. 
+In this week's lab you're going to work with your team to implement a wall follower in tesse. This environment uses a realistic physics simulator, so you will need to account for delays in acceleration and deceleration. The car can tilt, and drift, which will add significant noise to recieved lidar data. In addition, the environment is dense with other buildings, lamposts, trees, and city fixtures.
 
-The goal is to complete the two tracks described below autonomously without collisions, with an added challenge of maintaining an average speed above 4m/s (see grading rubric). 
+The goal is to complete the two tracks described below autonomously without collisions, with an added challenge of maintaining an average speed above 4 m/s (see grading rubric).
 
-A good place to start would be to sit down with your new team and consolidate your wall folower code from last week's lab. You should be able to put your working code in `/src/wall_follower_tesse.py`, change the parameters to the appropriate tesse parameters in `params_tesse.yaml`, and run the example launch file in `/launch` to get a minimal working wall follower in tesse. 
+A good place to start would be to sit down with your new team and consolidate your wall follower code from last week's lab. You should be able to put your working code in `/src/wall_follower_tesse.py`, change the parameters to the appropriate tesse parameters in `params_tesse.yaml`, and run the example launch file in `/launch` to get a minimal working wall follower in tesse. See the Starter Code section below for more details on the file structure.
 
 ## Submission
 
-- include team assessment form (should this also be in due date chart above?)
-- spell out deliverables
+For this lab you will be publishing a report on your team's github pages website, giving a briefing presentation together with your team, and submitting a [team member assessment form](https://docs.google.com/forms/d/e/1FAIpQLScM6T3JsnlFQldhL_fVmAr9FkUILOjbXHM_nYxK280UZwJPww/viewform). See the deliverables chart at the top of this page for due dates and times.
+
+- todo: spell out deliverables
 
 ## Grading
 
