@@ -1,6 +1,6 @@
 | Deliverable | Due Date              |
 |---------------|----------------------------------------------------------------------------|
-| Briefing (8 min presentation)  | Wednesday, March 17th at 1:00PM EST |
+| Briefing (8 min presentation + 3 min Q&A)  | Wednesday, March 17th at 1:00PM EST |
 | [Team Member Assessment](https://docs.google.com/forms/d/e/1FAIpQLScM6T3JsnlFQldhL_fVmAr9FkUILOjbXHM_nYxK280UZwJPww/viewform)  | Friday, March 19th at 11:59PM EST |
 | Report (on team github pages website)     | Friday, March 19th at 11:59PM EST |
 
@@ -18,7 +18,7 @@ A good place to start would be to sit down with your new team and consolidate yo
 
 ## Submission and Grading
 
-From now on, for each lab, you will be publishing a report on your team's github pages website, giving an 8 minute briefing presentation together with your team, and submitting a [team member assessment form](https://docs.google.com/forms/d/e/1FAIpQLScM6T3JsnlFQldhL_fVmAr9FkUILOjbXHM_nYxK280UZwJPww/viewform). See the deliverables chart at the top of this page for due dates and times.
+From now on, for each lab, you will be publishing a report on your team's github pages website, giving an 8 minute briefing presentation (plus 3 minutes Q&A) together with your team, and submitting a [team member assessment form](https://docs.google.com/forms/d/e/1FAIpQLScM6T3JsnlFQldhL_fVmAr9FkUILOjbXHM_nYxK280UZwJPww/viewform). See the deliverables chart at the top of this page for due dates and times.
 
 You can view the rubrics for the [lab report]() and the [briefing](). **TODO: link to rubrics** You will receive a grade out of 10 points for each. Your final lab grade will also be out of 10 points, based on the following weights:
 
@@ -28,7 +28,7 @@ You can view the rubrics for the [lab report]() and the [briefing](). **TODO: li
 | lab report grade (out of 10) | 70% |
 | average speed grade (out of 10) | 10% |
 
-The average speed grade refers to how fast your racecar is able to complete the wall following tracks - see below for details on the tracks and how to use the starter code to obtain your racecar's average speed. The raw 10-point average speed grade (accounting for 1 out of the 10 points of your total lab grade) is calculated as follows:
+The average speed grade refers to how fast your racecar is able to complete the wall following tracks - see below for details on the tracks and how to use the starter code to obtain your racecar's average speed. The raw 10-point average speed grade (accounting for 10% of your total lab grade) is calculated as follows:
 
     5 * min(1, your_simple_speed / staff_simple_speed) + 5 * min(1, your_complex_speed / staff_complex_speed)
 
