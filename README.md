@@ -49,7 +49,7 @@ Before starting, you will need to pull the master branch of `tesse-ros-bridge` (
 
 You will also need to download the TESSE executable for this lab [here](https://drive.google.com/drive/folders/1wrwHy6pXzNmuwC8j3FCzVFqShZzP0Tfg?usp=sharing) - go to the folder corresponding to your host OS and download the latest executable (highest version number).
 
-Fork this starter repository into your team github.mit.edu organization (rss2021-[TEAM_NUMBER]), and then clone your team's repository into your catkin workspace at `~/racecar_ws/src`.
+Next, you'll need to make a copy of this starter repository (`wall_follower_tesse`) in your team github.mit.edu organization (rss2021-[TEAM_NUMBER]). One way to do this is to download this staff repository as a zip (click the green Code dropdown, then select "Download ZIP"), make an empty private repository with a blank README in your organization (also name it `wall_follower_tesse`), and then push everything contained in the zip file to your team repo so that it matches this staff one. You will want to clone your team's repository into your catkin workspace at `~/racecar_ws/src`.
 
 Then rebuild your workspace with `catkin_make`:
 
